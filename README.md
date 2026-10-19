@@ -36,6 +36,14 @@ We propose a **privacy-preserving, multi-agent intelligent chatbot** for early P
 - **explains its decisions** with explainable AI (XAI), with every output traceable to a specific model version for accountability;
 - **protects sensitive health data** with privacy-enhancing techniques and secure access control, in line with the transparency and oversight requirements of the GDPR, HIPAA, and the EU AI Act.
 
+## Architecture
+
+<p align="center"><img src="docs/architecture.png" width="100%" alt="Three-stage architecture: AI-assisted medical history taking, clinical testing, and diagnosis prediction with doctor feedback" /></p>
+
+1. **Medical history taking.** The chatbot interviews the patient, gives a pre-diagnosis and test preparation, and structures the answers into a medical history.
+2. **Clinical testing.** A nurse conducts and records the tests in the same medical history.
+3. **Diagnosis support.** An AI model predicts a diagnosis from the medical history. The doctor reviews the prediction, and that feedback improves the model.
+
 ## Running the project page locally
 
 The page is built with [Astro](https://astro.build/), [MDX](https://mdxjs.com/), and [Tailwind](https://tailwindcss.com/). It requires [Node.js](https://nodejs.org/) **24+** and [pnpm](https://pnpm.io/) **11+**.

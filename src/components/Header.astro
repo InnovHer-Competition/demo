@@ -34,8 +34,8 @@ const hasBackground = Astro.slots.has("background");
 
 <header
   class:list={[
-    "full-bleed relative mb-12",
-    hasBackground && "-mt-16 pt-24 pb-24",
+    "full-bleed relative",
+    hasBackground ? "-mt-16 pt-24 pb-24" : "mb-12",
   ]}
 >
   {

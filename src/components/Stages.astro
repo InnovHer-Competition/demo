@@ -45,13 +45,13 @@ const colorClasses = {
         <div class="flex items-center justify-between gap-2">
           <span
             class:list={[
-              "rounded-full px-3 py-0.5 text-xs font-semibold tracking-wider uppercase",
+              "shrink-0 rounded-full px-3 py-0.5 text-xs font-semibold tracking-wider whitespace-nowrap uppercase",
               colorClasses[item.color].badge,
             ]}
           >
             Stage {index + 1}
           </span>
-          <span class="flex items-center gap-1.5 text-sm text-zinc-600 dark:text-zinc-300">
+          <span class="flex items-center gap-1.5 text-right text-sm leading-tight text-zinc-600 dark:text-zinc-300">
             <Icon name={item.icon} class="size-5" />
             {item.actor}
           </span>
