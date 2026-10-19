@@ -24,7 +24,8 @@ html {
 }
 
 :root {
-  --maximum-text-width: 50rem;
+  /* Same width as the <Wide> component, so text and figures line up */
+  --maximum-text-width: 100rem;
   --minimum-inline-margin: 1.5rem;
   --actual-inline-margin: max(
     var(--minimum-inline-margin),
