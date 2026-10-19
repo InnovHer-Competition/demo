@@ -35,39 +35,51 @@ const hasBackground = Astro.slots.has("background");
 <header
   class:list={[
     "full-bleed relative mb-12",
-    hasBackground && "-mt-16 pt-24 pb-28",
+    hasBackground && "-mt-16 pt-24 pb-24",
   ]}
 >
   {
     hasBackground && (
       <div class="cover absolute inset-0 z-0 overflow-hidden">
         <slot name="background" />
-        {/* Darken the cover so the white header text stays legible. */}
-        <div class="absolute inset-0 bg-black/40" />
       </div>
     )
   }
   <div
     class:list={[
-      "relative z-10 mx-auto flex max-w-[50rem] flex-col items-center px-6 text-center",
+      "relative z-10 mx-auto flex max-w-7xl flex-col items-center px-6 text-center",
       hasBackground
-        ? "gap-10 text-white prose-headings:text-white [text-shadow:0_0_8px_rgba(0,0,0,0.6)]"
+        ? "gap-10 text-white prose-headings:text-white"
         : "gap-6",
     ]}
   >
-    <h1 class="my-0 text-5xl font-medium">{title}</h1>
-    <div class="flex flex-row flex-wrap justify-center gap-x-8 gap-y-4">
+    <h1
+      class="my-0 max-w-5xl text-4xl leading-tight font-semibold tracking-tight text-balance sm:text-5xl"
+    >
+      {title}
+    </h1>
+    <div
+      class="grid w-full grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-2 lg:grid-cols-4"
+    >
       {
         authors.map((author) => (
-          <div class="flex flex-col items-center text-center">
-            <div class="flex flex-row text-xl">
+          <div class="flex flex-col items-center gap-1 text-center">
+            <div class="text-xl font-medium whitespace-nowrap">
               {author.url ? (
-                <a class:list={[hasBackground && "not-prose text-blue-200 hover:text-blue-100 underline decoration-dashed underline-offset-4 hover:decoration-solid"]} href={author.url}>{author.name}</a>
+                <a
+                  class:list={[
+                    hasBackground &&
+                      "not-prose text-white underline decoration-white/50 decoration-dashed underline-offset-4 hover:decoration-solid",
+                  ]}
+                  href={author.url}
+                >
+                  {author.name}
+                </a>
               ) : (
                 author.name
               )}
               {author.notes && (
-                <sup class="text-xl">
+                <sup>
                   {author.notes.map(
                     (note, index, array) =>
                       note + (index < array.length - 1 ? "," : ""),
@@ -75,7 +87,18 @@ const hasBackground = Astro.slots.has("background");
                 </sup>
               )}
             </div>
-            {author.institution && <div>{author.institution}</div>}
+            {author.institution && (
+              <div
+                class:list={[
+                  "text-base leading-snug",
+                  hasBackground
+                    ? "text-white/80"
+                    : "text-zinc-600 dark:text-zinc-400",
+                ]}
+              >
+                {author.institution}
+              </div>
+            )}
           </div>
         ))
       }
@@ -83,7 +106,12 @@ const hasBackground = Astro.slots.has("background");
     {conference && <div>{conference}</div>}
     {
       notes && (
-        <div class="text-center text-sm">
+        <div
+          class:list={[
+            "-mt-4 text-center text-sm",
+            hasBackground && "text-white/80",
+          ]}
+        >
           {
             // prettier-ignore
             notes.map((note, index, array) => (
@@ -97,12 +125,15 @@ const hasBackground = Astro.slots.has("background");
     }
     {
       links && (
-        <div class="not-prose flex flex-row flex-wrap justify-center gap-2">
+        <div class="not-prose flex flex-row flex-wrap justify-center gap-3">
           {links.map((link) => (
             <a
               href={link.url}
-              class:list={["flex flex-row items-center gap-2 rounded-full px-5 py-2 text-lg hover:no-underline",
-                hasBackground ? "bg-white hover:bg-zinc-200 text-zinc-800 text-shadow-none shadow-[0_0_8px_rgba(0,0,0,0.6)]" : "bg-zinc-800 text-white hover:bg-black dark:text-zinc-900 dark:hover:bg-zinc-50 dark:bg-zinc-200"
+              class:list={[
+                "flex flex-row items-center gap-2 rounded-full px-5 py-2 text-lg font-medium transition hover:no-underline",
+                hasBackground
+                  ? "bg-white text-zinc-900 shadow-lg shadow-black/20 hover:-translate-y-0.5 hover:bg-zinc-100"
+                  : "bg-zinc-800 text-white hover:bg-black dark:bg-zinc-200 dark:text-zinc-900 dark:hover:bg-zinc-50",
               ]}
             >
               {link.icon && <Icon name={link.icon} />}

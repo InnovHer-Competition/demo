@@ -16,6 +16,9 @@ import Figure from "./components/Figure.astro";
 import Wide from "./components/Wide.astro";
 import ComingSoon from "./components/ComingSoon.astro";
 import ArchitectureFigure from "./components/ArchitectureFigure.astro";
+import Stats from "./components/Stats.astro";
+import Cards from "./components/Cards.astro";
+import Stages from "./components/Stages.astro";
 
 <Header
   title="Privacy-Preserving Multi-Agent Intelligent Chatbot for PCOS Diagnosis"
@@ -49,7 +52,9 @@ import ArchitectureFigure from "./components/ArchitectureFigure.astro";
     { name: "Demo", url: "#live-demo", icon: "ri:chat-smile-3-line" },
     { name: "Architecture", url: "#system-architecture", icon: "ri:flow-chart" },
   ]}
-/>
+>
+  <div slot="background" class="absolute inset-0 bg-linear-to-br from-rose-800 via-fuchsia-900 to-indigo-950" />
+</Header>
 
 <HighlightedSection>
 
@@ -57,9 +62,68 @@ import ArchitectureFigure from "./components/ArchitectureFigure.astro";
 
 Polycystic ovary syndrome (PCOS) affects an estimated 10–13% of women of reproductive age, yet up to 70% of them do not know they have it. Diagnosis is often slow, and the medical history it depends on is intimate: menstrual, sexual, and reproductive. Many patients are reluctant to share that information because of stigma, embarrassment, or fear that their data will be misused.
 
-We present a **privacy-preserving, multi-agent intelligent chatbot** for early PCOS screening and education. The system combines retrieval-augmented generation (RAG) over trusted medical sources, explainable AI (XAI) for transparent and auditable decisions, and privacy-enhancing techniques with secure access to sensitive health data. Patient screening, workflow automation, and personalised lifestyle recommendations all live in one auditable interface.
+We present a **privacy-preserving, multi-agent intelligent chatbot** for early PCOS screening and education. Patient screening, workflow automation, and personalised lifestyle recommendations all live in one auditable interface.
+
+<Cards
+  columns={4}
+  items={[
+    { icon: "ri:robot-2-line", title: "Multi-agent", text: "Specialised agents handle history taking, test preparation, and diagnosis support." },
+    { icon: "ri:book-open-line", title: "Grounded (RAG)", text: "Answers are retrieved from trusted medical sources, not invented." },
+    { icon: "ri:search-eye-line", title: "Explainable", text: "Every prediction comes with the reasoning clinicians need to check it." },
+    { icon: "ri:shield-keyhole-line", title: "Private by design", text: "Sensitive reproductive data is protected with secure, controlled access." },
+  ]}
+/>
 
 </HighlightedSection>
+
+## System architecture
+
+The system follows the patient from first contact to diagnosis in three stages. A clinician stays in the loop at every step.
+
+<Wide>
+  <Figure>
+    <ArchitectureFigure slot="figure" />
+    <Fragment slot="caption">Overview of the three-stage workflow: AI-assisted history taking, clinical testing, and diagnosis prediction with doctor feedback.</Fragment>
+  </Figure>
+</Wide>
+
+<Stages
+  items={[
+    {
+      title: "Medical history taking",
+      actor: "Chatbot & patient",
+      icon: "ri:chat-smile-2-line",
+      color: "blue",
+      steps: [
+        "The chatbot asks medical history questions.",
+        "The patient shares symptoms and basic information.",
+        "The chatbot gives a pre-diagnosis and test preparation.",
+        "Answers are extracted and structured into the medical history.",
+      ],
+    },
+    {
+      title: "Clinical testing",
+      actor: "Nurse",
+      icon: "ri:nurse-line",
+      color: "green",
+      steps: [
+        "The nurse conducts the tests the patient was prepared for.",
+        "Results are recorded in the same structured medical history.",
+      ],
+    },
+    {
+      title: "Diagnosis support",
+      actor: "AI model & doctor",
+      icon: "ri:stethoscope-line",
+      color: "amber",
+      steps: [
+        "The model predicts a diagnosis from the complete medical history.",
+        "The doctor reviews the prediction.",
+        "The doctor's feedback is used to improve the model.",
+      ],
+    },
+  ]}
+/>
 
 ## Video
 
@@ -73,14 +137,16 @@ PCOS comes from a disruption of the hypothalamic–pituitary–ovarian (HPO) axi
 
 It is also a **growing public health challenge**:
 
-| Indicator | Figure |
-| :--- | :---: |
-| Women of reproductive age affected (WHO) | 10–13% |
-| Affected women unaware of their condition (WHO) | up to 70% |
-| Increase in prevalent cases, women aged 15–49, 1990→2021 (GBD 2021) | +88.95% (34.8M → 65.8M) |
-| Women who waited more than two years for a diagnosis | 33.6% |
-| Women who consulted three or more health professionals before diagnosis | 47.1% |
-| Women with PCOS willing to use a dedicated app | 91% |
+<Stats
+  items={[
+    { value: "10–13%", label: "of women of reproductive age are affected", source: "WHO" },
+    { value: "Up to 70%", label: "of affected women are unaware of their condition", source: "WHO" },
+    { value: "+88.95%", label: "prevalent cases among women aged 15–49, 1990→2021 (34.8M → 65.8M)", source: "GBD 2021" },
+    { value: "33.6%", label: "of women waited more than two years for a diagnosis", source: "International survey, n = 1,385" },
+    { value: "47.1%", label: "consulted three or more health professionals before diagnosis", source: "International survey, n = 1,385" },
+    { value: "91%", label: "of women with PCOS are willing to use a dedicated app", source: "AskPCOS study" },
+  ]}
+/>
 
 There is no definitive cure, but **early diagnosis combined with lifestyle changes** (a nutritious diet and regular physical activity) is a low-cost way to limit metabolic complications. Accessible, evidence-based digital tools can raise awareness and shorten the path to diagnosis.
 
@@ -90,20 +156,16 @@ There is no definitive cure, but **early diagnosis combined with lifestyle chang
 
 **Explainability as a prerequisite for trust and compliance.** Opaque "black-box" models make clinical adoption harder and raise concerns about bias, fairness, and regulatory compliance. Our system aims for:
 
-- **Transparency**: users can see how and why an output was produced, so they can check AI-assisted decisions instead of accepting them blindly.
-- **Accountability**: every decision can be traced back to a specific model version.
-- **Fairness**: bias against particular patient subgroups is mitigated.
+<Cards
+  columns={3}
+  items={[
+    { icon: "ri:eye-line", title: "Transparency", text: "Users can see how and why an output was produced, so they can check AI-assisted decisions instead of accepting them blindly." },
+    { icon: "ri:history-line", title: "Accountability", text: "Every decision can be traced back to the specific model version that made it." },
+    { icon: "ri:scales-3-line", title: "Fairness", text: "Bias against particular patient subgroups is identified and mitigated." },
+  ]}
+/>
 
 These properties support the principles of biomedical ethics (beneficence, non-maleficence, autonomy, and justice). They also address the transparency and human-oversight requirements of the GDPR, HIPAA, and the EU AI Act, none of which prescribe a specific explainability mechanism.
-
-## System architecture
-
-<Wide>
-  <Figure>
-    <ArchitectureFigure slot="figure" />
-    <Fragment slot="caption">Overview of the privacy-preserving multi-agent chatbot architecture.</Fragment>
-  </Figure>
-</Wide>
 
 ## Live demo
 

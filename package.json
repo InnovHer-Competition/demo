@@ -37,6 +37,7 @@
     "rehype-citation": "^2.3.1",
     "rehype-katex": "^7.0.1",
     "remark-math": "^6.0.0",
+    "sharp": "0.34.5",
     "tailwind-merge": "^3.4.0",
     "tailwind-variants": "^3.2.2",
     "tailwindcss": "^4.3.0",

@@ -1,23 +1,33 @@
 import { promises as fs } from "fs";
 import { pdf } from "pdf-to-img";
-import sizeOf from "image-size";
+import sharp from "sharp";
 
 export async function renderPDF(inputFilePath: string): Promise<ImageMetadata> {
   const inputFileName = inputFilePath.split("/").pop();
   const fullPath = `./src/pages/${inputFilePath}`;
 
-  // Convert PDF to image with 4x scale (matching previous implementation)
+  // Render at 4x so small diagram labels stay crisp on high-DPI screens
   const document = await pdf(fullPath, {
-    scale: 2,
+    scale: 4,
   });
 
   // Get the first page
-  const image = await document.getPage(1);
+  const page = await document.getPage(1);
 
-  // Get image dimensions using image-size (much lighter than sharp)
-  const dimensions = sizeOf(image);
-  const width = dimensions.width;
-  const height = dimensions.height;
+  // Flatten onto white (so the figure stays legible in dark mode) and trim the
+  // blank margins that diagram exports often leave around the content
+  const { data: image, info } = await sharp(page)
+    .flatten({ background: "#ffffff" })
+    .trim({ threshold: 10 })
+    .extend({
+      top: 32,
+      bottom: 32,
+      left: 32,
+      right: 32,
+      background: "#ffffff",
+    })
+    .png()
+    .toBuffer({ resolveWithObject: true });
 
   // Ensure directories exist before writing the file
   const outputDir = `./dist/_astro`;
@@ -38,8 +48,8 @@ export async function renderPDF(inputFilePath: string): Promise<ImageMetadata> {
 
   return {
     src: src,
-    width: width,
-    height: height,
+    width: info.width,
+    height: info.height,
     format: "png",
   };
 }
