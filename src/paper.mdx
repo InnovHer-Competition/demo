@@ -1,0 +1,131 @@
+---
+# Browser-tab title and link-preview card. The heading shown on the page is
+# set separately on the <Header> component below.
+title: Privacy-Preserving Multi-Agent Intelligent Chatbot for PCOS Diagnosis
+
+theme: device
+
+favicon: favicon.svg
+
+description: A privacy-preserving, explainable multi-agent chatbot that supports early screening and education for Polycystic Ovary Syndrome (PCOS).
+---
+
+import Header from "./components/Header.astro";
+import HighlightedSection from "./components/HighlightedSection.astro";
+import Figure from "./components/Figure.astro";
+import Wide from "./components/Wide.astro";
+import ComingSoon from "./components/ComingSoon.astro";
+import ArchitectureFigure from "./components/ArchitectureFigure.astro";
+
+<Header
+  title="Privacy-Preserving Multi-Agent Intelligent Chatbot for PCOS Diagnosis"
+  authors={[
+    {
+      name: "Huyen-Trang Le",
+      url: "https://orcid.org/0009-0004-3738-0235",
+      institution: "IBISC, Université d’Évry Paris-Saclay",
+      notes: ["*"],
+    },
+    {
+      name: "Thanh-Nam Tran",
+      url: "https://orcid.org/0009-0007-3571-6075",
+      institution: "Télécom Paris, Institut Polytechnique de Paris",
+      notes: ["*"],
+    },
+    {
+      name: "Aakash Soni",
+      institution: "LyRIDS, ECE Paris",
+    },
+    {
+      name: "Samia Bouzefrane",
+      url: "https://orcid.org/0000-0002-0979-1289",
+      institution: "CEDRIC, Cnam Paris",
+    },
+  ]}
+  notes={[{ symbol: "*", text: "equal contribution" }]}
+  links={[
+    { name: "Paper (soon)", url: "#paper", icon: "ri:file-pdf-2-line" },
+    { name: "Video", url: "#video", icon: "ri:video-line" },
+    { name: "Demo", url: "#live-demo", icon: "ri:chat-smile-3-line" },
+    { name: "Architecture", url: "#system-architecture", icon: "ri:flow-chart" },
+  ]}
+/>
+
+<HighlightedSection>
+
+## Overview
+
+Polycystic ovary syndrome (PCOS) affects an estimated 10–13% of women of reproductive age, yet up to 70% of them do not know they have it. Diagnosis is often slow, and the medical history it depends on is intimate: menstrual, sexual, and reproductive. Many patients are reluctant to share that information because of stigma, embarrassment, or fear that their data will be misused.
+
+We present a **privacy-preserving, multi-agent intelligent chatbot** for early PCOS screening and education. The system combines retrieval-augmented generation (RAG) over trusted medical sources, explainable AI (XAI) for transparent and auditable decisions, and privacy-enhancing techniques with secure access to sensitive health data. Patient screening, workflow automation, and personalised lifestyle recommendations all live in one auditable interface.
+
+</HighlightedSection>
+
+## Video
+
+<ComingSoon title="Video presentation" icon="ri:video-line">
+  A walkthrough of the system will be published here.
+</ComingSoon>
+
+## Why PCOS?
+
+PCOS comes from a disruption of the hypothalamic–pituitary–ovarian (HPO) axis. Abnormal GnRH secretion raises LH relative to FSH. Together with insulin resistance, this drives excess androgen production in the ovaries, and the resulting hyperandrogenic environment disrupts follicle maturation, often leading to chronic anovulation. Left undiagnosed or poorly managed, PCOS raises long-term risks of type 2 diabetes, cardiovascular disease, endometrial hyperplasia, infertility, and psychological comorbidity.
+
+It is also a **growing public health challenge**:
+
+| Indicator | Figure |
+| :--- | :---: |
+| Women of reproductive age affected (WHO) | 10–13% |
+| Affected women unaware of their condition (WHO) | up to 70% |
+| Increase in prevalent cases, women aged 15–49, 1990→2021 (GBD 2021) | +88.95% (34.8M → 65.8M) |
+| Women who waited more than two years for a diagnosis | 33.6% |
+| Women who consulted three or more health professionals before diagnosis | 47.1% |
+| Women with PCOS willing to use a dedicated app | 91% |
+
+There is no definitive cure, but **early diagnosis combined with lifestyle changes** (a nutritious diet and regular physical activity) is a low-cost way to limit metabolic complications. Accessible, evidence-based digital tools can raise awareness and shorten the path to diagnosis.
+
+## Design goals
+
+**Facilitate disclosure, not just data collection.** A clinical consultation only works if patients are willing and able to share relevant information. Using a digital agent does not by itself make people disclose more. Trust in the system, transparency about how data is used, and perceived privacy and security are what matter. Our chatbot is designed so that patients can share sensitive information appropriately, while that information stays private, secure, and confidential.
+
+**Explainability as a prerequisite for trust and compliance.** Opaque "black-box" models make clinical adoption harder and raise concerns about bias, fairness, and regulatory compliance. Our system aims for:
+
+- **Transparency**: users can see how and why an output was produced, so they can check AI-assisted decisions instead of accepting them blindly.
+- **Accountability**: every decision can be traced back to a specific model version.
+- **Fairness**: bias against particular patient subgroups is mitigated.
+
+These properties support the principles of biomedical ethics (beneficence, non-maleficence, autonomy, and justice). They also address the transparency and human-oversight requirements of the GDPR, HIPAA, and the EU AI Act, none of which prescribe a specific explainability mechanism.
+
+## System architecture
+
+<Wide>
+  <Figure>
+    <ArchitectureFigure slot="figure" />
+    <Fragment slot="caption">Overview of the privacy-preserving multi-agent chatbot architecture.</Fragment>
+  </Figure>
+</Wide>
+
+## Live demo
+
+<ComingSoon title="Interactive demo" icon="ri:chat-smile-3-line">
+  An interactive demo of the chatbot will be available here.
+</ComingSoon>
+
+## Experimental results
+
+Results will cover diagnostic accuracy, assessment time, clinical utility, and clinician confidence. They will be added once the evaluation is complete.
+
+## Paper
+
+The manuscript is in preparation. A link to the full paper will be added here.
+
+## BibTeX citation
+
+```bibtex
+@misc{le2026pcoschatbot,
+  author = {Le, Huyen-Trang and Tran, Thanh-Nam and Soni, Aakash and Bouzefrane, Samia},
+  title  = {Privacy-Preserving Multi-Agent Intelligent Chatbot for {PCOS} Diagnosis},
+  year   = {2026},
+  note   = {Manuscript in preparation}
+}
+```

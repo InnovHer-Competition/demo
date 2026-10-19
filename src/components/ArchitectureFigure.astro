@@ -1,0 +1,24 @@
+---
+import { existsSync } from "fs";
+import Picture from "./Picture.astro";
+import ComingSoon from "./ComingSoon.astro";
+
+// Export the draw.io diagram as PDF (File → Export as → PDF, "Crop" checked)
+// and save it at this path. Until then a placeholder is shown.
+const pdfPath = "figures/architecture.pdf";
+const hasPdf = existsSync(`./src/pages/${pdfPath}`);
+---
+
+{
+  hasPdf ? (
+    <Picture
+      src={pdfPath}
+      alt="Architecture of the privacy-preserving multi-agent PCOS chatbot"
+    />
+  ) : (
+    <ComingSoon title="Architecture diagram" icon="ri:flow-chart">
+      Export the draw.io diagram to <code>src/pages/{pdfPath}</code> and it
+      will appear here.
+    </ComingSoon>
+  )
+}
