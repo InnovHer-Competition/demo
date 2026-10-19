@@ -53,22 +53,10 @@ To produce a static build in `./dist/`:
 pnpm run build
 ```
 
-### Editing content
-
-All content lives in [`src/paper.mdx`](./src/paper.mdx). Every component is documented in [`documentation.md`](./documentation.md).
-
-| To add | Do this |
-| --- | --- |
-| **Architecture diagram** | In draw.io, choose **File → Export as → PDF** (tick *Crop*) and save it as `src/pages/figures/architecture.pdf`. It replaces the placeholder and is converted to an optimized image at build time. |
-| **Video** | Replace the `<ComingSoon title="Video presentation">` block with `<YouTubeVideo videoId="..." />`, or with `<Video src={...} />` for a file in `src/assets/`. |
-| **Demo** | Replace the `<ComingSoon title="Interactive demo">` block with an `<iframe>` or a link to the hosted demo. |
-| **Paper link** | Update the `Paper (soon)` entry in the `links` prop of `<Header>`. |
-| **References** | Paste the paper's `Reference.bib` into `bibliography.bib`, cite with `[@key]`, and add a `## References` heading at the end of the page. |
-
 ### Deployment
 
 Every push to `main` builds the site and deploys it to GitHub Pages through [`.github/workflows/astro.yml`](./.github/workflows/astro.yml).
-One-time setup: in **Settings → Pages**, set **Source** to **GitHub Actions**. The page is then served at <https://innovher-competition.github.io/demo/>.
+One-time setup in **Settings → Pages**, set **Source** to **GitHub Actions**. The page is then served at <https://innovher-competition.github.io/demo/>.
 
 ## Citation
 
@@ -83,10 +71,10 @@ If you find this work useful, please cite:
 }
 ```
 
-## 📬 Contact
+## Contact
 
 For questions about the paper, contact [huyen.le@etud.univ-evry.fr](mailto:huyen.le@etud.univ-evry.fr) or [thanhnamtran1605@gmail.com](mailto:thanhnamtran1605@gmail.com), or open an issue.
 
-## 🙏 Acknowledgements
+## Acknowledgements
 
 The project page is built on Roman Hauksson-Neill's [Academic Project Page Template](https://github.com/RomanHauksson/academic-project-astro-template). That template is adapted from Eliahu Horwitz's [Academic Project Page Template](https://github.com/eliahuhorwitz/Academic-project-page-template) and Keunhong Park's [Nerfies page](https://nerfies.github.io/), and is licensed under [CC BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/).
