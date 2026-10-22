@@ -89,3 +89,9 @@
     {\LARGE\bfseries\color{PCOSrose}#1}\par\vspace{0.3em}
     {\footnotesize #2}
   \end{minipage}}
+
+% Block with a fixed body height, so blocks side by side line up
+\newcommand{\featureblock}[2]{%
+  \begin{block}{#1}
+    \small\parbox[t][2.8em][t]{\linewidth}{\raggedright #2}
+  \end{block}}

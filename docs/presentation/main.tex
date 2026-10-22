@@ -154,26 +154,18 @@ A \alert{privacy-preserving, multi-agent intelligent chatbot} for early PCOS scr
 
 \vspace{0.5cm}
 \begin{columns}[T]
-\column{0.47\textwidth}
-\begin{block}{Multi-agent}
-\small Specialised agents for history taking, test preparation, and diagnosis support.
-\end{block}
-\column{0.47\textwidth}
-\begin{block}{Explainable AI}
-\small Predictions come with the reasoning clinicians need to check them.
-\end{block}
+\column{0.44\textwidth}
+\featureblock{Multi-agent}{Specialised agents for history taking, test preparation, and diagnosis support.}
+\column{0.44\textwidth}
+\featureblock{Explainable AI}{Predictions come with the reasoning clinicians need to check them.}
 \end{columns}
 
-\vspace{0.3cm}
+\vspace{0.5cm}
 \begin{columns}[T]
-\column{0.47\textwidth}
-\begin{block}{Retrieval-augmented generation}
-\small Answers grounded in trusted medical sources.
-\end{block}
-\column{0.47\textwidth}
-\begin{block}{Privacy by design}
-\small Privacy-enhancing techniques and secure access to sensitive data.
-\end{block}
+\column{0.44\textwidth}
+\featureblock{Retrieval-augmented generation}{Answers grounded in trusted medical sources.}
+\column{0.44\textwidth}
+\featureblock{Privacy by design}{Privacy-enhancing techniques and secure access to sensitive data.}
 \end{columns}
 
 \end{frame}
@@ -196,7 +188,7 @@ A \alert{privacy-preserving, multi-agent intelligent chatbot} for early PCOS scr
 \begin{frame}{The Three Stages}
 
 \begin{columns}[t]
-\column{0.32\textwidth}
+\column{0.3\textwidth}
 \begin{block}{1\quad History taking}
 \footnotesize\textit{Chatbot \& patient}
 \begin{itemize}
@@ -207,7 +199,7 @@ A \alert{privacy-preserving, multi-agent intelligent chatbot} for early PCOS scr
 \end{itemize}
 \end{block}
 
-\column{0.32\textwidth}
+\column{0.3\textwidth}
 \begin{block}{2\quad Clinical testing}
 \footnotesize\textit{Nurse}
 \begin{itemize}
@@ -216,7 +208,7 @@ A \alert{privacy-preserving, multi-agent intelligent chatbot} for early PCOS scr
 \end{itemize}
 \end{block}
 
-\column{0.32\textwidth}
+\column{0.3\textwidth}
 \begin{block}{3\quad Diagnosis support}
 \footnotesize\textit{AI model \& doctor}
 \begin{itemize}
@@ -230,18 +222,99 @@ A \alert{privacy-preserving, multi-agent intelligent chatbot} for early PCOS scr
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Controllable History-Taking Agent}
+
+\begin{frame}{Research Questions}
+\framesubtitle{History-taking as a constrained POMDP: policy $\pi$, extractor $f$, quality $Q$}
+
+\vspace{0.3cm}
+\begin{columns}[T]
+\column{0.46\textwidth}
+\begin{block}{RQ1 -- Policy $\pi$}
+\textbf{How should the agent choose its next action?}
+\begin{itemize}
+	\item Cover the PCOS guideline fields
+	\item Follow the communication protocol
+	\item Respect consent and safety
+\end{itemize}
+\end{block}
+\column{0.46\textwidth}
+\begin{block}{RQ2 -- Extractor $f$ and quality $Q$}
+\textbf{How do we extract and assess a patient history?}
+\begin{itemize}
+	\item Facts, timing and chronology
+	\item Evidence and uncertainty per field
+	\item Coverage and factual accuracy
+\end{itemize}
+\end{block}
+\end{columns}
+
+\vspace{0.5cm}
+\begin{center}
+\small Initial use case: PCOS. Other conditions need their own schema and protocol.
+\end{center}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Proposed Agent Architecture}
+\framesubtitle{The LLM handles language; state, policy and constraints stay explicit}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.95\textwidth,height=0.72\textheight,keepaspectratio]{agent-architecture.pdf}
+\end{figure}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Evaluation Plan}
+\framesubtitle{Planned evaluation; no results are reported yet}
+
+\vspace{0.2cm}
+\begin{columns}[T]
+\column{0.3\textwidth}
+\begin{block}{Data and setting}
+\small
+\begin{itemize}
+	\item MediTOD dialogues for extraction
+	\item Simulated PCOS patients built from guideline profiles $z$
+	\item Clinician-reviewed pilot cases
+\end{itemize}
+\end{block}
+\column{0.3\textwidth}
+\begin{block}{Metrics}
+\small
+\begin{itemize}
+	\item \textbf{RQ2:} field coverage, accuracy, temporal consistency, unsupported claims
+	\item \textbf{RQ1:} protocol adherence, turns $T$, correct escalation
+\end{itemize}
+\end{block}
+\column{0.3\textwidth}
+\begin{block}{Baselines}
+\small
+\begin{itemize}
+	\item Prompt-only LLM
+	\item Rule-based guideline checklist
+	\item Hybrid: LLM with explicit policy and constraints
+\end{itemize}
+\end{block}
+\end{columns}
+
+\vspace{0.4cm}
+\begin{center}
+\small Reference standard: clinician-reviewed histories.
+\end{center}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Status and Future Work}
 
-\begin{frame}{Status and Future Work}
+\begin{frame}{Project Resources}
 
 \setlstep{0.4cm}{0.1cm}{0cm}
 \begin{itemize}
-	\item \textbf{Evaluation} (in progress):
-	\begin{itemize}
-		\item diagnostic accuracy;
-		\item reduction of assessment time;
-		\item clinical utility and clinician confidence.
-	\end{itemize}
 	\item \textbf{Video presentation} of the system: coming soon.
 	\item \textbf{Interactive demo} of the chatbot: coming soon.
 	\item \textbf{Project page}: \url{https://innovher-competition.github.io/demo/}
@@ -252,15 +325,35 @@ A \alert{privacy-preserving, multi-agent intelligent chatbot} for early PCOS scr
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusions}
 
-\begin{frame}{Conclusions}
+\begin{frame}{Conclusions and Next Steps}
 
-\setlstep{0.5cm}{0cm}{0cm}
+\begin{columns}[T]
+\column{0.46\textwidth}
+\begin{block}{Key messages}
+\small
+\setlstep{0.05cm}{0cm}{0cm}
 \begin{itemize}
-	\item PCOS is common, under-diagnosed, and slow to diagnose; early diagnosis matters.
-	\item Patients share intimate data only when they \alert{trust} the system: privacy and transparency are design requirements, not add-ons.
-	\item Our multi-agent chatbot combines RAG, explainable AI, and privacy-preserving data handling in a single auditable workflow, with clinicians kept in the loop.
-	\item Next: complete the evaluation and release the video and interactive demo.
+	\item For PCOS, the interview can inform two of three diagnostic criteria
+	\item History-taking formulated as a constrained POMDP: policy $\pi$, extractor $f$, quality $Q$
+	\item The proposed agent keeps state, policy and constraints explicit around the LLM
 \end{itemize}
+\end{block}
+\column{0.46\textwidth}
+\begin{block}{Next steps}
+\small
+\setlstep{0.05cm}{0cm}{0cm}
+\begin{itemize}
+	\item Build the PCOS schema $\mathcal{S}$ from the 2023 guideline
+	\item Implement prompt-only, rule-based and hybrid policies
+	\item Evaluate on MediTOD and simulated patients, then with clinician review
+\end{itemize}
+\end{block}
+\end{columns}
+
+\vspace{0.1cm}
+\begin{alertblock}{Scope}
+Clinician-reviewed history collection, not autonomous diagnosis.
+\end{alertblock}
 
 \end{frame}
 

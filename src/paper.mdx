@@ -19,6 +19,8 @@ import ArchitectureFigure from "./components/ArchitectureFigure.astro";
 import Stats from "./components/Stats.astro";
 import Cards from "./components/Cards.astro";
 import Stages from "./components/Stages.astro";
+import Picture from "./components/Picture.astro";
+import agentArchitecture from "../docs/diagram/agent-architecture.png";
 
 <Header
   title="Privacy-Preserving Multi-Agent Intelligent Chatbot for PCOS Diagnosis"
@@ -126,6 +128,42 @@ The system follows the patient from first contact to diagnosis in three stages. 
   ]}
 />
 
+## Controllable history-taking agent
+
+We formulate medical history-taking as a **constrained POMDP** with three components: a policy $\pi$ that chooses the next action, an extractor $f$ that turns the conversation into a structured history, and a quality measure $Q$ for that history. Each research question targets one component.
+
+<Cards
+  items={[
+    {
+      icon: "ri:route-line",
+      title: "RQ1 – Policy π",
+      text: "How should the agent choose its next action?",
+      points: ["Cover the PCOS guideline fields", "Follow the communication protocol", "Respect consent and safety"],
+    },
+    {
+      icon: "ri:file-list-3-line",
+      title: "RQ2 – Extractor f and quality Q",
+      text: "How do we extract and assess a patient history?",
+      points: ["Facts, timing and chronology", "Evidence and uncertainty per field", "Coverage and factual accuracy"],
+    },
+  ]}
+/>
+
+The **LLM handles language; state, policy and constraints stay explicit.** A state tracker keeps the known, missing and uncertain fields of the history against a PCOS schema $\mathcal{S}$ and the Calgary–Cambridge consultation steps. The policy picks the next action (ask, clarify, acknowledge, summarize, escalate or stop), and every action is checked against consent, red-flag and escalation rules $\mathcal{C}$ before the LLM phrases it for the patient.
+
+<Wide>
+  <Figure>
+    <Picture slot="figure" src={agentArchitecture} alt="Agent architecture: the patient talks to an LLM; a state tracker, a policy, a guideline and protocol module, and a constraint checker keep the history, next action and safety rules explicit" />
+    <Fragment slot="caption">Proposed agent architecture. The LLM only produces and reads language; state $\hat{H}_t$, policy $\pi(a_t \mid h_t)$ and constraints $\mathcal{C}$ are explicit components.</Fragment>
+  </Figure>
+</Wide>
+
+The initial use case is PCOS, where the interview alone can inform two of the three diagnostic criteria. Other conditions need their own schema and protocol.
+
+<div class="not-prose my-6 rounded-xl border-l-4 border-rose-600 bg-rose-50 px-5 py-4 text-lg text-rose-950 dark:border-rose-400 dark:bg-rose-500/10 dark:text-rose-100">
+  <strong>Scope:</strong> clinician-reviewed history collection, not autonomous diagnosis.
+</div>
+
 ## Video
 
 <ComingSoon title="Video presentation" icon="ri:video-line">
@@ -174,9 +212,32 @@ These properties support the principles of biomedical ethics (beneficence, non-m
   An interactive demo of the chatbot will be available here.
 </ComingSoon>
 
-## Experimental results
+## Evaluation plan
 
-Results will cover diagnostic accuracy, assessment time, clinical utility, and clinician confidence. They will be added once the evaluation is complete.
+The evaluation is planned; no results are reported yet. The reference standard is clinician-reviewed histories.
+
+<Cards
+  columns={3}
+  items={[
+    {
+      icon: "ri:database-2-line",
+      title: "Data and setting",
+      points: ["MediTOD dialogues for extraction", "Simulated PCOS patients built from guideline profiles", "Clinician-reviewed pilot cases"],
+    },
+    {
+      icon: "ri:line-chart-line",
+      title: "Metrics",
+      points: ["<strong>RQ2:</strong> field coverage, accuracy, temporal consistency, unsupported claims", "<strong>RQ1:</strong> protocol adherence, number of turns, correct escalation"],
+    },
+    {
+      icon: "ri:scales-3-line",
+      title: "Baselines",
+      points: ["Prompt-only LLM", "Rule-based guideline checklist", "Hybrid: LLM with explicit policy and constraints"],
+    },
+  ]}
+/>
+
+**Next steps:** build the PCOS schema $\mathcal{S}$ from the 2023 international guideline, implement the prompt-only, rule-based and hybrid policies, and evaluate on MediTOD and simulated patients, then with clinician review.
 
 ## Paper
 

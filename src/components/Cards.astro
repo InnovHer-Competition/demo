@@ -4,7 +4,8 @@ import { Icon } from "astro-icon/components";
 type Card = {
   icon: string;
   title: string;
-  text: string;
+  text?: string;
+  points?: string[];
 };
 
 interface Props {
@@ -32,9 +33,18 @@ const columnClasses = {
         <div class="text-lg font-semibold text-zinc-900 dark:text-zinc-100">
           {item.title}
         </div>
-        <div class="text-base leading-relaxed text-zinc-600 dark:text-zinc-300">
-          {item.text}
-        </div>
+        {item.text && (
+          <div class="text-base leading-relaxed text-zinc-600 dark:text-zinc-300">
+            {item.text}
+          </div>
+        )}
+        {item.points && (
+          <ul class="m-0 flex list-disc flex-col gap-1.5 pl-5 text-base leading-snug text-zinc-600 dark:text-zinc-300">
+            {item.points.map((point) => (
+              <li set:html={point} />
+            ))}
+          </ul>
+        )}
       </div>
     ))
   }
