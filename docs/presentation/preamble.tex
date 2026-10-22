@@ -1,0 +1,91 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% packages
+\usepackage{amsmath}		% the main package in the AMS-LATEX distribution
+\usepackage{amsfonts}		% extended set of fonts for use in mathematics
+\usepackage{amssymb}		% adds new symbols to be used in math mode
+\usepackage{mathrsfs}		% math fonts, e.g., Laplace
+\usepackage{float}			% provides the H float modifier option
+\usepackage{multirow}		% tables \multirow command
+\usepackage{subcaption}		% enables subfigures
+\usepackage{siunitx}
+\usepackage{textcomp}
+\usepackage{gensymb}		% typesetting of units
+\usepackage{verbatim}		% new verbatim environment, \begin{comment}...\end{comment}, \verbatiminput
+%add extra packages if needed here
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% settings
+
+% Architecture diagram is shared with the project page
+\graphicspath{{./figures/}{./theme/}{../diagram/}}
+
+% Accent colour, matching the project page
+\definecolor{PCOSrose}{RGB}{190,18,60}
+\setbeamercolor{alerted text}{fg=PCOSrose}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% template overrides
+% The DEE@ISEP class adds ISEP logos, a degree name and a student number.
+% None apply to this paper, so the title page, frame title and footline are
+% redefined here without them. DEEclassP.cls itself is left unchanged.
+
+\makeatletter
+
+% Frame title without the ISEP logo
+\setbeamertemplate{frametitle}{%
+  \nointerlineskip
+  \begin{beamercolorbox}[wd=\paperwidth,leftskip=.3cm,rightskip=.3cm plus1fil,vmode]{frametitle}
+    \vskip.6ex
+    \usebeamerfont{frametitle}\strut\insertframetitle\strut\par
+    \ifx\insertframesubtitle\@empty\else
+      {\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\insertframesubtitle\strut\par}%
+    \fi
+    \vskip.4ex
+  \end{beamercolorbox}%
+}
+
+% Title page: title, authors, affiliations, date
+\setbeamertemplate{title page}{%
+  \vbox{}
+  \vfill
+  \begingroup
+    \centering
+    \begin{beamercolorbox}[sep=8pt,center]{title}
+      \usebeamerfont{title}\inserttitle\par
+    \end{beamercolorbox}
+    \vskip1.2em
+    {\usebeamerfont{author}\insertauthor\par}
+    \vskip0.8em
+    {\usebeamerfont{institute}\insertinstitute\par}
+    \vskip1em
+    {\usebeamerfont{date}\insertdate\par}
+  \endgroup
+  \vfill
+}
+
+% Footline: short authors | short title | date | frame number
+\setbeamertemplate{footline}{%
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.3\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+    \usebeamerfont{author in head/foot}\insertshortauthor
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.45\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}\insertshorttitle
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.15\paperwidth,ht=2.25ex,dp=1ex,center]{date in head/foot}%
+    \usebeamerfont{date in head/foot}\insertshortdate
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.1\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% user macros
+
+% Large statistic with a caption underneath, for the burden slide
+\newcommand{\stat}[2]{%
+  \begin{minipage}[t]{\linewidth}\centering
+    {\LARGE\bfseries\color{PCOSrose}#1}\par\vspace{0.3em}
+    {\footnotesize #2}
+  \end{minipage}}

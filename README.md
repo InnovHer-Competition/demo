@@ -16,6 +16,7 @@
 
 [![Project Page](https://img.shields.io/badge/Project-Page-2ea44f?style=for-the-badge&logo=astro&logoColor=white)](https://innovher-competition.github.io/demo/)
 [![Paper](https://img.shields.io/badge/Paper-Coming%20Soon-lightgrey?style=for-the-badge&logo=adobeacrobatreader&logoColor=white)](#)
+[![Slides](https://img.shields.io/badge/Slides-PDF-124f87?style=for-the-badge&logo=latex&logoColor=white)](docs/presentation/main.pdf)
 [![Video](https://img.shields.io/badge/Video-Coming%20Soon-lightgrey?style=for-the-badge&logo=youtube&logoColor=white)](#)
 [![Demo](https://img.shields.io/badge/Demo-Coming%20Soon-lightgrey?style=for-the-badge&logo=googlechrome&logoColor=white)](#)
 
@@ -43,6 +44,15 @@ We propose a **privacy-preserving, multi-agent intelligent chatbot** for early P
 1. **Medical history taking.** The chatbot interviews the patient, gives a pre-diagnosis and test preparation, and structures the answers into a medical history.
 2. **Clinical testing.** A nurse conducts and records the tests in the same medical history.
 3. **Diagnosis support.** An AI model predicts a diagnosis from the medical history. The doctor reviews the prediction, and that feedback improves the model.
+
+## Presentation
+
+The slides are in [`docs/presentation/`](./docs/presentation/) ([PDF](./docs/presentation/main.pdf)), built from the DEE@ISEP Beamer template. To rebuild the PDF after editing `main.tex`, use [Tectonic](https://tectonic-typesetting.github.io/) (no TeX installation needed) or any LaTeX distribution:
+
+```bash
+cd docs/presentation
+tectonic main.tex        # or: latexmk -pdf main.tex
+```
 
 ## Running the project page locally
 
