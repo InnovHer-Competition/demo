@@ -38,7 +38,7 @@ We propose a **privacy-preserving, multi-agent intelligent chatbot** for early P
 
 ## Architecture
 
-<p align="center"><img src="docs/architecture.png" width="100%" alt="Three-stage architecture: AI-assisted medical history taking, clinical testing, and diagnosis prediction with doctor feedback" /></p>
+<p align="center"><img src="docs/diagram/architecture.png" width="100%" alt="Three-stage architecture: AI-assisted medical history taking, clinical testing, and diagnosis prediction with doctor feedback" /></p>
 
 1. **Medical history taking.** The chatbot interviews the patient, gives a pre-diagnosis and test preparation, and structures the answers into a medical history.
 2. **Clinical testing.** A nurse conducts and records the tests in the same medical history.
